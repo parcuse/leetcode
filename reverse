@@ -1,0 +1,37 @@
+    int reverse(int x) {
+        int result = 0;
+        if(!x){
+            return 0;
+        }
+        while(true){
+            if (x % 10 != 0){
+                break;
+            }
+            else{
+                x = x / 10;
+            }
+        }
+        vector<int> p;
+        while(x){
+            p.push_back(x % 10);
+            x = x / 10;
+        }
+        int length = static_cast<int>(p.size());
+        for(int j = 0;j< length;j++){
+            int k = *(p.end() - 1);
+            p.pop_back();
+            if(result > 0){
+                if(INT_MAX - result < k * pow(10, j)){
+                    return 0;
+                }
+            }
+            if(result < 0){
+                if(INT_MIN - result > k * pow(10, j)){
+                    return 0;
+                }
+            }
+            result += k * pow(10, j);
+        }
+        return result;
+    }
+
